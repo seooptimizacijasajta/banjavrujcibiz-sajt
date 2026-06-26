@@ -1,0 +1,53 @@
+---
+layout: base.njk
+title: Kontaktirajte nas — Banja Vrujci
+description: "Kontaktirajte Banju Vrujci — adresa, telefon, email i forma za upite."
+permalink: /kontakt/
+activeNav: kontakt
+breadcrumbs:
+  - { label: "Početna", url: "/" }
+  - { label: "Kontakt", url: null }
+---
+<div class="container">
+  <div class="page-head">
+    <div class="eyebrow">Kontakt · Banja Vrujci</div>
+    <h1>Kontaktirajte nas</h1>
+    <p>Imate pitanje o smeštaju, banji ili sajtu? Pišite nam ili nas pozovite — odgovaramo u najkraćem mogućem roku.</p>
+  </div>
+
+  <div class="contact-layout" style="padding-bottom:80px;">
+    <div class="contact-info-card">
+      <div class="contact-info-row">
+        <div class="icon">📍</div>
+        <div class="text"><b>Adresa</b>Banja Vrujci, 14243 Gornja Toplica<br>Opština Mionica, Kolubarski okrug, Srbija</div>
+      </div>
+      <div class="contact-info-row">
+        <div class="icon">📞</div>
+        <div class="text"><b>Telefon</b><a href="tel:+381643315996">+381 64 3315 996</a></div>
+      </div>
+      <div class="contact-info-row">
+        <div class="icon">✉️</div>
+        <div class="text"><b>Email</b><a href="mailto:info@banjavrujci.biz">info@banjavrujci.biz</a></div>
+      </div>
+      <div class="social-row">
+        <a href="https://www.facebook.com/Banja.Vrujci" target="_blank" rel="noopener">f</a>
+        <a href="https://www.twitter.com/banjavrujci" target="_blank" rel="noopener">t</a>
+        <a href="https://www.instagram.com/banja.vrujci" target="_blank" rel="noopener">in</a>
+      </div>
+      <div class="map-embed">
+        <iframe src="https://www.google.com/maps?q=Banja+Vrujci,+Mionica,+Serbia&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+
+    <div>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Demo forma — u produkciji povezati sa pravim email servisom (npr. Web3Forms ili PHP mail).');">
+        <input type="text" placeholder="Vaše ime" required>
+        <input type="email" placeholder="Vaš email" required>
+        <input type="text" placeholder="Tema (npr. Upit za smeštaj)">
+        <textarea placeholder="Vaša poruka..." required></textarea>
+        <button type="submit">Pošalji poruku</button>
+        <div class="form-note">⚠️ Demo forma — u produkciji je treba povezati sa stvarnim mail servisom (preporuka: Web3Forms, besplatno, bez PHP komplikacija sa spam filterima).</div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+---
+layout: base.njk
+title: Nekretnine u Banji Vrujci
+description: "Pregled ponude nekretnina u Banji Vrujci — apartmani, kuće, stanovi, placevi i poslovni prostor."
+permalink: /nekretnine/
+activeNav: nekretnine
+breadcrumbs:
+  - { label: "Početna", url: "/" }
+  - { label: "Nekretnine", url: null }
+---
+<div class="container">
+  <div class="page-head">
+    <div class="eyebrow">Nekretnine · Banja Vrujci</div>
+    <h1>Nekretnine u Banji Vrujci</h1>
+    <p>Pregled ponude nekretnina u Banji Vrujci — apartmani, kuće, stanovi, placevi i poslovni prostor. Kontakt u vezi kupovine ostvarujete direktno sa vlasnikom nekretnine, bez posrednika.</p>
+  </div>
+
+  <div class="content-wrap" style="padding-top:0;">
+    <div class="re-type-grid">
+      <div class="re-type"><div class="icon">🏢</div><h4>Apartmani</h4></div>
+      <div class="re-type"><div class="icon">🏠</div><h4>Kuće i stanovi</h4></div>
+      <div class="re-type"><div class="icon">🌳</div><h4>Placevi i zemljište</h4></div>
+      <div class="re-type"><div class="icon">🏪</div><h4>Poslovni prostor</h4></div>
+    </div>
+
+    {% if not nekretnineFeed or nekretnineFeed.length == 0 %}
+    <div class="note-box">📋 Feed sa banjavrujci.info/nekretnine trenutno nije dostupan ili je prazan — ova lista se automatski osvežava pri svakom novom build-u sajta sa aktuelnim oglasima.</div>
+    {% else %}
+    <div class="news-grid">
+      {% for n in nekretnineFeed %}
+      <a class="news-card" href="{{ n.link }}" target="_blank" rel="noopener">
+        <div class="news-thumb">
+          {% if n.image %}<img src="{{ n.image }}" alt="{{ n.title }}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<span>🏠</span>'">{% else %}<span>🏠</span>{% endif %}
+        </div>
+        <div class="news-body">
+          {% if n.pubDate %}<div class="news-date">{{ n.pubDate }}</div>{% endif %}
+          <h4>{{ n.title }}</h4>
+          <p>{{ n.description }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>

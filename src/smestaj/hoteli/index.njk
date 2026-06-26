@@ -1,0 +1,40 @@
+---
+layout: base.njk
+title: Hoteli u Banji Vrujci — Hotel Vrujci
+description: "Hoteli u Banji Vrujci - Hotel Vrujci, jedini hotel u banji, sa termalnim bazenima."
+permalink: /smestaj/hoteli/
+activeNav: smestaj
+breadcrumbs:
+  - { label: "Početna", url: "/" }
+  - { label: "Smeštaj", url: "/smestaj" }
+  - { label: "Hoteli", url: null }
+---
+<div class="container">
+  <div class="page-head">
+    <div class="eyebrow">Smeštaj · Banja Vrujci</div>
+    <h1>Hoteli u Banji Vrujci</h1>
+    <p>Hotel Vrujci je jedini hotel u banji — sportsko-rekreativni kompleks sa termalnim bazenima i lekovitom vodom.</p>
+  </div>
+
+  <div class="listing-grid" id="listingGrid" style="padding-top:0;">
+    {% for item in collections.hoteli %}
+    <a class="list-card" data-name="{{ item.data.title }}" href="{{ item.url | noslash }}">
+      <div class="lc-thumb">
+        {% if item.data.slike and item.data.slike[0] %}
+        <img src="{{ item.data.slike[0] }}" alt="{{ item.data.title }}" onerror="this.style.opacity=0">
+        {% else %}
+        <div class="ph-thumb"><span class="ph-mono">{{ item.data.title | first }}</span><span class="ph-label">Foto u pripremi</span></div>
+        {% endif %}
+      </div>
+      <div class="lc-body">
+        <h3>{{ item.data.title }}</h3>
+        {% if item.data.subtitle %}<p>{{ item.data.subtitle }}</p>{% endif %}
+        <div class="lc-footer">
+          <span class="lc-call">📞 {{ item.data.telefon or "Pozovite za broj" }}</span>
+          <span class="lc-link">Detalji →</span>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>

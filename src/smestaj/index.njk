@@ -1,0 +1,39 @@
+---
+layout: base.njk
+title: Smeštaj u Banji Vrujci
+description: "Pregled svih kategorija smeštaja u Banji Vrujci — vile, apartmani, privatni smeštaj, hoteli i sobe."
+permalink: /smestaj/
+activeNav: smestaj
+breadcrumbs:
+  - { label: "Početna", url: "/" }
+  - { label: "Smeštaj", url: null }
+---
+<div class="container">
+  <div class="page-head">
+    <div class="eyebrow">Smeštaj · Banja Vrujci</div>
+    <h1>Smeštaj u Banji Vrujci</h1>
+    <p>Od porodičnih apartmana do vila sa sopstvenim bazenima — pronađite smeštaj koji odgovara vašem odmoru.</p>
+  </div>
+  <div class="cat-grid" style="padding:40px 0;">
+    <a href="/smestaj/vile" class="cat-card">
+      <div class="overlay"></div>
+      <div class="cat-body"><span>{{ collections.vile.length }} objekata</span><h3>Vile</h3><div class="arrow">Pogledaj ponudu →</div></div>
+    </a>
+    <a href="/smestaj/apartmani-banja-vrujci" class="cat-card">
+      <div class="overlay"></div>
+      <div class="cat-body"><span>{{ collections.apartmani.length }} objekata</span><h3>Apartmani</h3><div class="arrow">Pogledaj ponudu →</div></div>
+    </a>
+    <a href="/smestaj/privatni" class="cat-card">
+      <div class="overlay"></div>
+      <div class="cat-body"><span>{{ collections.privatni.length }} objekata</span><h3>Privatni smeštaj</h3><div class="arrow">Pogledaj ponudu →</div></div>
+    </a>
+    <a href="/smestaj/hoteli" class="cat-card">
+      <div class="overlay"></div>
+      <div class="cat-body"><span>Banjski kompleks</span><h3>Hoteli</h3><div class="arrow">Pogledaj ponudu →</div></div>
+    </a>
+    <a href="/smestaj/sobe" class="cat-card">
+      <div class="overlay"></div>
+      <div class="cat-body"><span>{{ collections.sobe.length }} objekata</span><h3>Sobe</h3><div class="arrow">Pogledaj ponudu →</div></div>
+    </a>
+  </div>
+</div>

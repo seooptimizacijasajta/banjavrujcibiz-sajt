@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="sr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title or 'Banja Vrujci — Smeštaj i turistički vodič' }}</title>
+  <meta name="description" content="{{ description or 'Banja Vrujci - kompletan vodič za smeštaj, bazene i odmor u banji.' }}">
+  <link rel="canonical" href="https://www.banjavrujci.biz{{ page.url | noslash }}">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ title or 'Banja Vrujci' }}">
+  <meta property="og:description" content="{{ description or 'Banja Vrujci - kompletan vodič za smeštaj, bazene i odmor u banji.' }}">
+  <meta property="og:url" content="https://www.banjavrujci.biz{{ page.url | noslash }}">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="sr_RS">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="preconnect" href="https://www.banja-vrujci.net">
+
+  {% if schema %}
+  <script type="application/ld+json">{{ schema | dump | safe }}</script>
+  {% endif %}
+  {% if breadcrumbs %}
+  <script type="application/ld+json">{{ { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": (breadcrumbs | toBreadcrumbList) } | dump | safe }}</script>
+  {% endif %}
+</head>
+<body>
+  {% include "partials/header.njk" %}
+  {% if breadcrumbs %}{% include "partials/breadcrumbs.njk" %}{% endif %}
+  <main>
+    {{ content | safe }}
+  </main>
+  {% include "partials/footer.njk" %}
+  <script src="/assets/js/script.js" defer></script>
+</body>
+</html>

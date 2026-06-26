@@ -1,0 +1,6 @@
+{% macro kartica(item) %}
+<a class="kartica-smestaj" href="{{ item.url | noslash }}">
+  <div class="kartica-thumb">{{ item.data.title | first }}</div>
+  <h3>{{ item.data.title }}</h3>
+</a>
+{% endmacro %}

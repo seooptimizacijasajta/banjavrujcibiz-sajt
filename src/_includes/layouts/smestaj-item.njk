@@ -1,0 +1,320 @@
+---
+layout: base.njk
+---
+<div class="container gallery-wrap">
+  {% if heroBanner %}
+  <div class="hero-banner">
+    {% if slike and slike[0] %}
+    <img src="{{ slike[0] }}" alt="{{ title }}" onerror="this.style.opacity=0">
+    {% else %}
+    <div class="ph-hero"><span class="ph-mono-xl">{{ title | first }}</span><span class="ph-label-xl">Foto u pripremi</span></div>
+    {% endif %}
+  </div>
+  {% elif slike and slike.length %}
+  <div class="gallery-grid">
+    <div class="gallery-main" data-lightbox-src="{{ slike[0] }}">
+      <img src="{{ slike[0] }}" alt="{{ title }}" onerror="this.style.opacity=0">
+    </div>
+    <div class="gallery-side">
+      {% if slike[1] %}
+      <div class="g-thumb" data-lightbox-src="{{ slike[1] }}">
+        <img src="{{ slike[1] }}" alt="{{ title }}" onerror="this.style.opacity=0">
+      </div>
+      {% endif %}
+      {% if slike[2] %}
+      <div class="g-thumb" data-lightbox-src="{{ slike[2] }}">
+        <img src="{{ slike[2] }}" alt="{{ title }}" onerror="this.style.opacity=0">
+        {% if slike.length > 3 %}
+        <div class="show-all" data-lightbox-src="{{ slike[0] }}">📷 Sve fotografije ({{ slike.length }})</div>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% for slika in slike %}
+    {% if loop.index0 > 2 %}<div data-lightbox-src="{{ slika }}" style="display:none"></div>{% endif %}
+  {% endfor %}
+  {% else %}
+  <div class="gallery-grid">
+    <div class="ph-thumb-lg"><span class="ph-mono-xl">{{ title | first }}</span><span class="ph-label-xl">Foto u pripremi</span></div>
+    <div class="gallery-side">
+      <div class="ph-thumb"><span class="ph-mono">{{ title | first }}</span><span class="ph-label">Foto u pripremi</span></div>
+      <div class="ph-thumb"><span class="ph-mono">{{ title | first }}</span><span class="ph-label">Foto u pripremi</span></div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<div class="container">
+  <div class="title-block">
+    <div class="title-left">
+      <div class="eyebrow">{{ kategorijaLabel or kategorija }} · Banja Vrujci</div>
+      <h1>{{ title }}</h1>
+      {% if starsStatic %}<div class="stars-static">{{ starsStatic }}</div>{% endif %}
+      {% if subtitle %}<div class="subtitle">{{ subtitle }}</div>{% endif %}
+      {% if rating %}
+      <div class="rating-static"><span class="stars">★★★★★</span><span class="num">{{ rating }}{% if reviews %} ({{ reviews }} ocene gostiju){% endif %}</span></div>
+      {% endif %}
+      {% if badges and badges.length %}
+      <div class="badge-row">
+        {% for badge in badges %}<span class="badge">{{ badge }}</span>{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="quick-actions">
+      <a class="btn-outline" href="https://www.google.com/maps/search/?api=1&query={{ title | urlencode }}+Banja+Vrujci" target="_blank" rel="noopener">📍 Mapa</a>
+      {% if telefon %}<a class="btn-gold" href="tel:{{ telefon | replace(' ', '') }}">📞 Pozovi sada</a>{% endif %}
+    </div>
+  </div>
+
+  <div class="main-layout">
+    <div class="content-col">
+
+      {% if heritageNote %}
+      <div class="heritage-card">
+        <div class="icon">{{ heritageIcon or "🏛️" }}</div>
+        <p>{{ heritageNote }}</p>
+      </div>
+      {% endif %}
+
+      {% if poolHighlight %}
+      <div class="pool-highlight">
+        <div class="icon">{{ poolHighlight.icon or "🏊" }}</div>
+        <div>
+          <h3>{{ poolHighlight.naslov }}</h3>
+          {% if poolHighlight.opis %}<p>{{ poolHighlight.opis }}</p>{% endif %}
+          {% if poolHighlight.specs and poolHighlight.specs.length %}
+          <div class="pool-specs">
+            {% for s in poolHighlight.specs %}<div class="spec"><div class="num">{{ s.num }}</div><div class="lbl">{{ s.lbl }}</div></div>{% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+
+      <section>
+        <h2>O smeštaju</h2>
+        <div class="desc">{{ content | safe }}</div>
+        {% if pendingNote %}<div class="note-box">{{ pendingNote }}</div>{% endif %}
+      </section>
+
+      {% if statGrid and statGrid.length %}
+      <section>
+        <h2>{{ statGridTitle or "Specifikacije" }}</h2>
+        <div class="quick-facts" style="margin:0;">
+          {% for s in statGrid %}<div class="qfact"><div class="num">{{ s.num }}</div><div class="label">{{ s.label }}</div></div>{% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if services and services.length %}
+      <section>
+        <h2>{{ servicesTitle or "Usluge" }}</h2>
+        <div class="therapy-grid">
+          {% for s in services %}<div class="therapy-pill">{{ s }}</div>{% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if specGroups and specGroups.length %}
+      <section>
+        <h2>{{ specGroupsTitle or "Detalji" }}</h2>
+        <div class="spec-grid">
+          {% for g in specGroups %}
+          <div class="spec-card">
+            <h4>{{ g.naslov }}</h4>
+            <ul>{% for item in g.stavke %}<li>{{ item }}</li>{% endfor %}</ul>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if amenities and amenities.length %}
+      <section>
+        <h2>Sadržaji</h2>
+        <div class="amenity-grid">
+          {% for a in amenities %}<div class="amenity">{{ a }}</div>{% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if apartmani and apartmani.length %}
+      <section>
+        <h2>Apartmani u ponudi</h2>
+        <div class="apt-grid">
+          {% for apt in apartmani %}
+          <div class="apt-card"{% if apt.slika %} data-lightbox-src="{{ apt.slika }}"{% endif %}>
+            <div class="apt-thumb">
+              {% if apt.slika %}<img src="{{ apt.slika }}" alt="{{ apt.naslov }}" onerror="this.style.opacity=0">{% else %}<div class="gallery-placeholder">{{ apt.naslov | first }}</div>{% endif %}
+            </div>
+            <div class="apt-body">
+              <h4>{{ apt.naslov }}</h4>
+              {% if apt.meta %}<div class="apt-meta">{{ apt.meta }}</div>{% endif %}
+              {% if apt.opis %}<p>{{ apt.opis }}</p>{% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if roomTypes and roomTypes.length %}
+      <section>
+        <h2>Tipovi smeštaja</h2>
+        <div class="room-grid">
+          {% for r in roomTypes %}
+          <div class="room-card">
+            <div class="room-thumb">
+              {% if r.slika %}<img src="{{ r.slika }}" alt="{{ r.naslov }}" onerror="this.style.opacity=0">{% else %}<span>{{ r.naslov | first }}</span>{% endif %}
+            </div>
+            <div class="room-body"><h4>{{ r.naslov }}</h4>{% if r.opis %}<p>{{ r.opis }}</p>{% endif %}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if features and features.length %}
+      <section>
+        <h2>{{ featuresTitle or "Sadržaji" }}</h2>
+        <div class="feature-grid">
+          {% for f in features %}
+          <div class="feature-card"><h4>{{ f.naslov }}</h4>{% if f.opis %}<p>{{ f.opis }}</p>{% endif %}</div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if treatments and treatments.length %}
+      <section>
+        <h2>{{ treatmentsTitle or "Lečenje" }}</h2>
+        {% if treatmentsIntro %}<p class="desc" style="margin-bottom:18px;">{{ treatmentsIntro }}</p>{% endif %}
+        <div class="treat-list">
+          {% for t in treatments %}<div>{{ t }}</div>{% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if trails and trails.length %}
+      <section>
+        <h2>{{ trailsTitle or "Staze" }}</h2>
+        {% if trailsIntro %}<p class="desc" style="margin-bottom:14px;">{{ trailsIntro }}</p>{% endif %}
+        <div class="trail-list">
+          {% for t in trails %}<span class="trail-tag">{{ t }}</span>{% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if highlight %}
+      <section>
+        <h2>{{ highlight.sectionTitle or "Izdvajamo" }}</h2>
+        <div class="highlight-card">
+          <div class="icon">{{ highlight.icon or "✨" }}</div>
+          <div class="text">
+            {% if highlight.naslov %}<h4>{{ highlight.naslov }}</h4>{% endif %}
+            {% if highlight.opis %}<p>{{ highlight.opis }}</p>{% endif %}
+            {% if highlight.tags and highlight.tags.length %}
+            <div class="highlight-tags">{% for t in highlight.tags %}<span>{{ t }}</span>{% endfor %}</div>
+            {% endif %}
+          </div>
+        </div>
+      </section>
+      {% endif %}
+
+      {% if voucherNote %}
+      <section>
+        <h2>{{ voucherNoteTitle or "Vaučeri za odmor" }}</h2>
+        <div class="note-box">{{ voucherNote }}</div>
+      </section>
+      {% endif %}
+
+      {% if whyItems and whyItems.length %}
+      <section>
+        <h2>{{ whyItemsTitle or "Zašto baš ovaj smeštaj" }}</h2>
+        <div class="why-grid">
+          {% for w in whyItems %}<div class="why-item">{{ w }}</div>{% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if restaurant %}
+      <section>
+        <h2>{{ restaurant.sectionTitle or "Restoran u sklopu objekta" }}</h2>
+        <div class="restaurant-card">
+          <div class="icon">🍽️</div>
+          <div class="text">
+            {% if restaurant.naslov %}<h4>{{ restaurant.naslov }}</h4>{% endif %}
+            {% if restaurant.opis %}<p>{{ restaurant.opis }}</p>{% endif %}
+          </div>
+        </div>
+      </section>
+      {% endif %}
+
+      <section>
+        <h2>Lokacija</h2>
+        {% if lokacijaOpis %}<p class="desc" style="margin-bottom:18px;">{{ lokacijaOpis }}</p>{% endif %}
+        <div class="map-embed">
+          <iframe src="https://www.google.com/maps?q=Banja+Vrujci,+Mionica,+Serbia&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="sidebar">
+      <div class="contact-card">
+        <h3>Kontaktirajte {{ title }}</h3>
+        {% if contactNote %}<div class="note">{{ contactNote }}</div>{% endif %}
+        {% if telefon %}<div class="contact-row">📞 <a href="tel:{{ telefon | replace(' ', '') }}">{{ telefon }}</a>{% if telefonLabel %} <span style="font-size:11px;color:var(--cream-dim);">({{ telefonLabel }})</span>{% endif %}</div>{% endif %}
+        {% if telefon2 %}<div class="contact-row">📞 <a href="tel:{{ telefon2 | replace(' ', '') }}">{{ telefon2 }}</a>{% if telefon2Label %} <span style="font-size:11px;color:var(--cream-dim);">({{ telefon2Label }})</span>{% endif %}</div>{% endif %}
+        {% if email %}<div class="contact-row">✉️ <a href="mailto:{{ email }}">{{ email }}</a></div>{% endif %}
+        {% if telefon %}<a class="btn-gold" href="tel:{{ telefon | replace(' ', '') }}">Pozovi sada</a>{% endif %}
+        {% if email %}<a class="btn-outline" href="mailto:{{ email }}">Pošalji upit</a>{% endif %}
+
+        {% if infoList and infoList.length %}
+        <div class="info-list">
+          {% for row in infoList %}
+          <div class="row"><span>{{ row.label }}</span><span>{{ row.value }}</span></div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="share-row">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.banjavrujci.biz{{ page.url | noslash }}" target="_blank" rel="noopener">f</a>
+          <a href="https://twitter.com/intent/tweet?url=https://www.banjavrujci.biz{{ page.url | noslash }}&text={{ title | urlencode }}" target="_blank" rel="noopener">t</a>
+          <a href="https://www.google.com/maps/search/?api=1&query={{ title | urlencode }}+Banja+Vrujci" target="_blank" rel="noopener">📍</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if slicni and slicni.length %}
+<section class="similar">
+  <div class="container">
+    <h2>Slični smeštaji u okolini</h2>
+    <div class="similar-grid">
+      {% for s in slicni %}
+      <a class="sim-card" href="{{ s.url }}">
+        <div class="sim-thumb">
+          {% if s.slika %}<img src="{{ s.slika }}" alt="{{ s.naziv }}" onerror="this.style.opacity=0">{% else %}<span>{{ s.naziv | first }}</span>{% endif %}
+        </div>
+        <div class="sim-body"><h4>{{ s.naziv }}</h4><span class="tag">{{ s.oznaka }}</span></div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if slike and slike.length %}
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-controls"><button data-lightbox-close>✕</button></div>
+  <div class="lightbox-nav">
+    <button data-lightbox-prev>‹</button>
+    <button data-lightbox-next>›</button>
+  </div>
+  <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-counter" id="lightbox-counter"></div>
+</div>
+{% endif %}

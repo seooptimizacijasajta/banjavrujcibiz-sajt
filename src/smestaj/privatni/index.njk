@@ -1,0 +1,83 @@
+---
+layout: base.njk
+title: Privatni smeštaj u Banji Vrujci — Kuće, brvnare, vajati
+description: "Privatni smeštaj u Banji Vrujci — kuće, brvnare, vajati i vikendice za izdavanje. Pregledajte ponudu i kontaktirajte vlasnike direktno."
+permalink: /smestaj/privatni/
+activeNav: smestaj
+breadcrumbs:
+  - { label: "Početna", url: "/" }
+  - { label: "Smeštaj", url: "/smestaj" }
+  - { label: "Privatni smeštaj", url: null }
+---
+<div class="container">
+  <div class="page-head">
+    <div class="eyebrow">Smeštaj · Banja Vrujci</div>
+    <h1>Privatni smeštaj u Banji Vrujci</h1>
+    <p>Od porodičnih kuća i brvnara do vajata iz bajke — privatni smeštaj u Banji Vrujci nudi raznovrsne opcije za odmor u miru, daleko od gužve, uz banjske bazene na koracima.</p>
+  </div>
+
+  <div class="filter-bar">
+    <div class="chip-row" id="chipRow">
+      <button class="chip active" data-filter="all">Sve opcije</button>
+      <button class="chip" data-filter="dist" data-max="300">≤ 300m od bazena</button>
+      <button class="chip" data-filter="cap" data-min="8">8+ osoba</button>
+    </div>
+    <select class="sort-select" id="sortSelect">
+      <option value="default">Preporučeno</option>
+      <option value="distance">Najbliže bazenima</option>
+      <option value="capacity">Najveći kapacitet</option>
+      <option value="name">Naziv A–Š</option>
+    </select>
+  </div>
+  <div class="results-count" id="resultsCount">Prikazano <b>{{ collections.privatni.length }}</b> od <b>{{ collections.privatni.length }}</b> objekata</div>
+
+  <div class="listing-grid" id="listingGrid">
+    {% for item in collections.privatni %}
+    {% set c = item.data.card %}
+    <a class="list-card"
+       data-distance="{{ c.distance if c else 9999 }}"
+       data-capacity="{{ c.capacity if c else 0 }}"
+       data-name="{{ item.data.title }}"
+       href="{{ item.url | noslash }}">
+      <div class="lc-thumb">
+        {% if c and c.badge %}<span class="lc-badge">{{ c.badge }}</span>{% endif %}
+        {% if item.data.slike and item.data.slike[0] %}
+        <img src="{{ item.data.slike[0] }}" alt="{{ item.data.title }}" onerror="this.style.opacity=0">
+        {% else %}
+        <div class="ph-thumb"><span class="ph-mono">{{ item.data.title | first }}</span><span class="ph-label">Foto u pripremi</span></div>
+        {% endif %}
+      </div>
+      <div class="lc-body">
+        <h3>{{ item.data.title }}</h3>
+        {% if c and c.desc %}<p>{{ c.desc }}</p>{% endif %}
+        {% if c and c.tags and c.tags.length %}
+        <div class="lc-tags">{% for tag in c.tags %}<span class="lc-tag">{{ tag }}</span>{% endfor %}</div>
+        {% endif %}
+        <div class="lc-footer">
+          <span class="lc-call">📞 {{ item.data.telefon or "Pozovite za broj" }}</span>
+          <span class="lc-link">Detalji →</span>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="no-results" id="noResults">Nema objekata koji odgovaraju izabranim filterima. <a href="#" onclick="resetListingFilters();return false;" style="color:var(--gold-light)">Resetuj filtere</a></div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Privatni smeštaj u Banji Vrujci",
+  "url": "https://www.banjavrujci.biz/smestaj/privatni",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {% for item in collections.privatni %}
+      {"@type":"ListItem","position":{{ loop.index }},"name":"{{ item.data.title }}","url":"https://www.banjavrujci.biz{{ item.url | noslash }}"}{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+}
+</script>

@@ -1,0 +1,90 @@
+---
+layout: base.njk
+title: Vremenska prognoza za Banju Vrujci
+description: "Vremenska prognoza za Banju Vrujci uživo — trenutna temperatura i 5-dnevna prognoza preko Open-Meteo servisa."
+permalink: /info/vremenska-prognoza/
+activeNav: info
+breadcrumbs:
+  - { label: "Početna", url: "/" }
+  - { label: "Info", url: "/info/lecenje" }
+  - { label: "Vremenska prognoza", url: null }
+---
+<div class="container">
+  <div class="page-head">
+    <div class="eyebrow">Info · Banja Vrujci</div>
+    <h1>Vremenska prognoza za Banju Vrujci</h1>
+    <p>Pogledajte kako je trenutno vreme u Banji Vrujci i kako će biti narednih dana — posebno korisno ako planirate dolazak u sezoni otvorenih bazena.</p>
+  </div>
+
+  <div class="content-wrap">
+    <section class="block">
+      <h2>Trenutno vreme</h2>
+      <div class="weather-card">
+        <div id="weatherContent">
+          <div class="weather-loading">Učitavanje vremenske prognoze...</div>
+        </div>
+        <div class="weather-note">Podaci o vremenu se učitavaju uživo putem Open-Meteo servisa (besplatan, bez potrebe za API ključem) — brže i pouzdanije od starog AccuWeather widgeta.</div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+  const days = ['Ned','Pon','Uto','Sre','Čet','Pet','Sub'];
+
+  function weatherIcon(code){
+    if(code === 0) return '☀️';
+    if([1,2,3].includes(code)) return '⛅';
+    if([45,48].includes(code)) return '🌫️';
+    if([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(code)) return '🌧️';
+    if([71,73,75,77,85,86].includes(code)) return '❄️';
+    if([95,96,99].includes(code)) return '⛈️';
+    return '🌤️';
+  }
+  function weatherText(code){
+    if(code === 0) return 'Vedro';
+    if([1,2,3].includes(code)) return 'Promenljivo oblačno';
+    if([45,48].includes(code)) return 'Magla';
+    if([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(code)) return 'Kiša';
+    if([71,73,75,77,85,86].includes(code)) return 'Sneg';
+    if([95,96,99].includes(code)) return 'Grmljavina';
+    return 'Promenljivo';
+  }
+
+  async function loadWeather(){
+    const el = document.getElementById('weatherContent');
+    try{
+      const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=44.2853&longitude=19.9697&current_weather=true&daily=temperature_2m_max,precipitation_probability_max&timezone=auto');
+      const data = await res.json();
+      const cur = data.current_weather;
+      const daily = data.daily;
+
+      let daysHtml = '';
+      for(let i=0;i<Math.min(5,daily.time.length);i++){
+        const d = new Date(daily.time[i]);
+        daysHtml += `<div class="wday">
+          <div class="d">${days[d.getDay()]}</div>
+          <div class="t">${Math.round(daily.temperature_2m_max[i])}°</div>
+          <div class="p">💧 ${daily.precipitation_probability_max[i]}%</div>
+        </div>`;
+      }
+
+      el.innerHTML = `
+        <div class="weather-top">
+          <div class="weather-now">
+            <div class="temp">${Math.round(cur.temperature)}°</div>
+            <div class="meta">
+              <div class="cond">${weatherIcon(cur.weathercode)} ${weatherText(cur.weathercode)}</div>
+              <div class="sub">Banja Vrujci, Srbija</div>
+            </div>
+          </div>
+          <div class="weather-source">🔄 Uživo · Open-Meteo</div>
+        </div>
+        <div class="weather-days">${daysHtml}</div>
+      `;
+    }catch(err){
+      el.innerHTML = `<div class="weather-loading">Trenutno nije moguće učitati prognozu uživo. Pokušajte ponovo kasnije.</div>`;
+    }
+  }
+  loadWeather();
+</script>

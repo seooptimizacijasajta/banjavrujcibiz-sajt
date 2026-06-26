@@ -1,0 +1,88 @@
+---
+layout: base.njk
+title: Apartmani u Banji Vrujci — Privatan smeštaj
+description: "Pregled svih apartmana u Banji Vrujci — preko 25 privatnih apartmana, blizu hotelskih i Novih bazena. Filtrirajte po udaljenosti i kapacitetu."
+permalink: /smestaj/apartmani-banja-vrujci/
+activeNav: smestaj
+breadcrumbs:
+  - { label: "Početna", url: "/" }
+  - { label: "Smeštaj", url: "/smestaj" }
+  - { label: "Apartmani", url: null }
+---
+<div class="container">
+  <div class="page-head">
+    <div class="eyebrow">Smeštaj · Banja Vrujci</div>
+    <h1>Apartmani u Banji Vrujci</h1>
+    <p>Banja Vrujci raspolaže sa preko 25 privatnih apartmana — od jednostavnih studija do prostranih apartmana sa spa centrom. Većina je smeštena u krugu od 600 metara oko hotelskih i Novih bazena. Filtrirajte po udaljenosti i kapacitetu da pronađete pravi izbor za vaš odmor.</p>
+  </div>
+
+  <div class="filter-bar">
+    <div class="chip-row" id="chipRow">
+      <button class="chip active" data-filter="all">Svi apartmani</button>
+      <button class="chip" data-filter="dist" data-max="300">≤ 300m od bazena</button>
+      <button class="chip" data-filter="dist" data-max="600">≤ 600m od bazena</button>
+      <button class="chip" data-filter="cap" data-min="5">5+ osoba</button>
+    </div>
+    <select class="sort-select" id="sortSelect">
+      <option value="default">Preporučeno</option>
+      <option value="distance">Najbliže bazenima</option>
+      <option value="capacity">Najveći kapacitet</option>
+      <option value="name">Naziv A–Š</option>
+    </select>
+  </div>
+  <div class="results-count" id="resultsCount">Prikazano <b>{{ collections.apartmani.length }}</b> od <b>{{ collections.apartmani.length }}</b> apartmana</div>
+
+  <div class="listing-grid" id="listingGrid">
+    {% for item in collections.apartmani %}
+    {% set c = item.data.card %}
+    <a class="list-card{% if c and c.batch == 2 %} batch-2{% endif %}"
+       data-distance="{{ c.distance if c else 9999 }}"
+       data-capacity="{{ c.capacity if c else 0 }}"
+       data-name="{{ item.data.title }}"
+       href="{{ item.url | noslash }}">
+      <div class="lc-thumb">
+        {% if c and c.badge %}<span class="lc-badge">{{ c.badge }}</span>{% endif %}
+        {% if item.data.slike and item.data.slike[0] %}
+        <img src="{{ item.data.slike[0] }}" alt="{{ item.data.title }}" onerror="this.style.opacity=0">
+        {% else %}
+        <div class="ph-thumb"><span class="ph-mono">{{ item.data.title | first }}</span><span class="ph-label">Foto u pripremi</span></div>
+        {% endif %}
+      </div>
+      <div class="lc-body">
+        <h3>{{ item.data.title }}</h3>
+        {% if c and c.desc %}<p>{{ c.desc }}</p>{% endif %}
+        {% if c and c.tags and c.tags.length %}
+        <div class="lc-tags">{% for tag in c.tags %}<span class="lc-tag">{{ tag }}</span>{% endfor %}</div>
+        {% endif %}
+        <div class="lc-footer">
+          <span class="lc-call">📞 {{ item.data.telefon or "Pozovite za broj" }}</span>
+          <span class="lc-link">Detalji →</span>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="no-results" id="noResults">Nema apartmana koji odgovaraju izabranim filterima. <a href="#" onclick="resetListingFilters();return false;" style="color:var(--gold-light)">Resetuj filtere</a></div>
+
+  <div class="load-more-wrap">
+    <button class="load-more-btn" id="loadMoreBtn">Učitaj još apartmana</button>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Apartmani u Banji Vrujci",
+  "url": "https://www.banjavrujci.biz/smestaj/apartmani-banja-vrujci",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {% for item in collections.apartmani %}
+      {"@type":"ListItem","position":{{ loop.index }},"name":"{{ item.data.title }}","url":"https://www.banjavrujci.biz{{ item.url | noslash }}"}{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+}
+</script>

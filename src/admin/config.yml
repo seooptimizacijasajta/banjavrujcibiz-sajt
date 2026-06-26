@@ -1,0 +1,143 @@
+# TODO: zameni "TVOJ-GITHUB-USERNAME/banjavrujci-sajt" pravim repo imenom kad ga napraviš na GitHub-u.
+backend:
+  name: github
+  repo: TVOJ-GITHUB-USERNAME/banjavrujci-sajt
+  branch: main
+
+# OAuth handshake je implementiran kao Vercel serverless funkcije u /api/auth.js
+# i /api/callback.js (isti domen kao sajt, GitHub OAuth App).
+# Potrebno je u Vercel projektu podesiti env varijable OAUTH_CLIENT_ID i
+# OAUTH_CLIENT_SECRET (iz GitHub OAuth App podešavanja: Settings > Developer
+# settings > OAuth Apps > New OAuth App; Authorization callback URL mora biti
+# https://www.banjavrujci.biz/api/callback).
+base_url: https://www.banjavrujci.biz
+auth_endpoint: api/auth
+
+media_folder: "src/uploads"
+public_folder: "/uploads"
+
+publish_mode: simple
+
+collections:
+  - name: "vile"
+    label: "Vile"
+    folder: "src/smestaj/vile"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Naslov", name: "title", widget: "string" }
+      - { label: "Objavljeno", name: "published", widget: "boolean", default: true }
+      - { label: "Telefon", name: "telefon", widget: "string", required: false }
+      - { label: "Email", name: "email", widget: "string", required: false }
+      - { label: "Slike", name: "slike", widget: "list", field: { label: "Slika", name: "slika", widget: "image" }, required: false }
+      - { label: "Opis", name: "body", widget: "markdown" }
+      - { label: "Kategorija", name: "kategorija", widget: "hidden", default: "vile" }
+      - { label: "Permalink", name: "permalink", widget: "string" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/smestaj-item.njk" }
+
+  - name: "apartmani"
+    label: "Apartmani"
+    folder: "src/smestaj/apartmani-banja-vrujci"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Naslov", name: "title", widget: "string" }
+      - { label: "Objavljeno", name: "published", widget: "boolean", default: true }
+      - { label: "Telefon", name: "telefon", widget: "string", required: false }
+      - { label: "Email", name: "email", widget: "string", required: false }
+      - { label: "Slike", name: "slike", widget: "list", field: { label: "Slika", name: "slika", widget: "image" }, required: false }
+      - { label: "Opis", name: "body", widget: "markdown" }
+      - { label: "Kategorija", name: "kategorija", widget: "hidden", default: "apartmani-banja-vrujci" }
+      - { label: "Permalink", name: "permalink", widget: "string" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/smestaj-item.njk" }
+
+  - name: "privatni"
+    label: "Privatni smeštaj"
+    folder: "src/smestaj/privatni"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Naslov", name: "title", widget: "string" }
+      - { label: "Objavljeno", name: "published", widget: "boolean", default: true }
+      - { label: "Telefon", name: "telefon", widget: "string", required: false }
+      - { label: "Email", name: "email", widget: "string", required: false }
+      - { label: "Slike", name: "slike", widget: "list", field: { label: "Slika", name: "slika", widget: "image" }, required: false }
+      - { label: "Opis", name: "body", widget: "markdown" }
+      - { label: "Kategorija", name: "kategorija", widget: "hidden", default: "privatni" }
+      - { label: "Permalink", name: "permalink", widget: "string" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/smestaj-item.njk" }
+
+  - name: "hoteli"
+    label: "Hoteli"
+    folder: "src/smestaj/hoteli"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Naslov", name: "title", widget: "string" }
+      - { label: "Objavljeno", name: "published", widget: "boolean", default: true }
+      - { label: "Telefon", name: "telefon", widget: "string", required: false }
+      - { label: "Email", name: "email", widget: "string", required: false }
+      - { label: "Slike", name: "slike", widget: "list", field: { label: "Slika", name: "slika", widget: "image" }, required: false }
+      - { label: "Opis", name: "body", widget: "markdown" }
+      - { label: "Kategorija", name: "kategorija", widget: "hidden", default: "hoteli" }
+      - { label: "Permalink", name: "permalink", widget: "string" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/smestaj-item.njk" }
+
+  - name: "sobe"
+    label: "Sobe"
+    folder: "src/smestaj/sobe"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Naslov", name: "title", widget: "string" }
+      - { label: "Objavljeno", name: "published", widget: "boolean", default: true }
+      - { label: "Telefon", name: "telefon", widget: "string", required: false }
+      - { label: "Email", name: "email", widget: "string", required: false }
+      - { label: "Slike", name: "slike", widget: "list", field: { label: "Slika", name: "slika", widget: "image" }, required: false }
+      - { label: "Opis", name: "body", widget: "markdown" }
+      - { label: "Kategorija", name: "kategorija", widget: "hidden", default: "sobe" }
+      - { label: "Permalink", name: "permalink", widget: "string" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/smestaj-item.njk" }
+
+  - name: "vesti"
+    label: "Vesti"
+    folder: "src/vesti"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Naslov", name: "title", widget: "string" }
+      - { label: "Objavljeno", name: "published", widget: "boolean", default: true }
+      - { label: "Datum", name: "date", widget: "datetime", required: false }
+      - { label: "Slika", name: "slika", widget: "image", required: false }
+      - { label: "Tekst", name: "body", widget: "markdown" }
+      - { label: "Permalink", name: "permalink", widget: "string" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "base.njk" }
+
+  - name: "nekretnine"
+    label: "Nekretnine"
+    folder: "src/nekretnine"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Naslov", name: "title", widget: "string" }
+      - { label: "Objavljeno", name: "published", widget: "boolean", default: true }
+      - { label: "Cena", name: "cena", widget: "string", required: false }
+      - { label: "Telefon", name: "telefon", widget: "string", required: false }
+      - { label: "Slike", name: "slike", widget: "list", field: { label: "Slika", name: "slika", widget: "image" }, required: false }
+      - { label: "Opis", name: "body", widget: "markdown" }
+      - { label: "Permalink", name: "permalink", widget: "string" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "base.njk" }

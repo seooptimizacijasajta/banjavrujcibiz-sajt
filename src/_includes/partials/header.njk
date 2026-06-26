@@ -1,0 +1,43 @@
+<header id="siteHeader">
+  <div class="container nav-wrap">
+    <a href="/" class="logo">
+      <span class="top"><b>Banja</b> Vrujci</span>
+      <span class="bottom">Turistički vodič &amp; smeštaj</span>
+    </a>
+    <nav class="main-nav">
+      <div class="has-drop">
+        <a href="/vodic/kako-doci" class="{{ 'active' if activeNav == 'vodic' }}">Vodič</a>
+        <div class="dropdown">
+          <a href="/vodic/kako-doci">Kako doći</a>
+          <a href="/vodic/izletista">Izletišta</a>
+          <a href="/vodic/bazeni">Bazeni</a>
+          <a href="/vodic/restorani">Restorani</a>
+          <a href="/vodic/kako-doci">Red vožnje</a>
+        </div>
+      </div>
+      <div class="has-drop">
+        <a href="/smestaj" class="{{ 'active' if activeNav == 'smestaj' }}">Smeštaj</a>
+        <div class="dropdown">
+          <a href="/smestaj/apartmani-banja-vrujci">Apartmani</a>
+          <a href="/smestaj/vile">Vile</a>
+          <a href="/smestaj/hoteli">Hoteli</a>
+          <a href="/smestaj/privatni">Privatni smeštaj</a>
+          <a href="/smestaj/sobe">Sobe</a>
+        </div>
+      </div>
+      <a href="/nekretnine" class="{{ 'active' if activeNav == 'nekretnine' }}">Nekretnine</a>
+      <div class="has-drop">
+        <a href="/info/lecenje" class="{{ 'active' if activeNav == 'info' }}">Info</a>
+        <div class="dropdown">
+          <a href="/info/lecenje">Lečenje</a>
+          <a href="/info/vremenska-prognoza">Vremenska prognoza</a>
+          <a href="/info/istorija">Istorija</a>
+          <a href="/info/mapa">Mapa</a>
+        </div>
+      </div>
+      <a href="/vesti" class="{{ 'active' if activeNav == 'vesti' }}">Vesti</a>
+      <a href="/kontakt" class="cta-btn">Kontakt</a>
+    </nav>
+    <div class="burger"><span></span><span></span><span></span></div>
+  </div>
+</header>

@@ -1,0 +1,92 @@
+---
+layout: base.njk
+title: Vile u Banji Vrujci — Smeštaj sa lux apartmanima
+description: "Pregled svih vila u Banji Vrujci — Vila Sofija, Jelena, Iva, Ema, Elipsa, Aqua Casa i druge. Filtrirajte po udaljenosti od bazena i kapacitetu."
+permalink: /smestaj/vile/
+activeNav: smestaj
+breadcrumbs:
+  - { label: "Početna", url: "/" }
+  - { label: "Smeštaj", url: "/smestaj" }
+  - { label: "Vile", url: null }
+---
+<div class="container">
+  <div class="page-head">
+    <div class="eyebrow">Smeštaj · Banja Vrujci</div>
+    <h1>Vile u Banji Vrujci</h1>
+    <p>Vile u Banji Vrujci nude razne pogodnosti — neke u svom sastavu imaju restoran i nude usluge pansiona ili polupansiona, druge su poznate po blizini bazena i mirnoj lokaciji u centru banje. Pregledajte svih {{ collections.vile.length }} vila i izaberite onu koja najviše odgovara vašem odmoru.</p>
+  </div>
+
+  <div class="filter-bar">
+    <div class="chip-row" id="chipRow">
+      <button class="chip active" data-filter="all">Sve vile</button>
+      <button class="chip" data-filter="dist" data-max="250">≤ 250m od bazena</button>
+      <button class="chip" data-filter="dist" data-max="500">≤ 500m od bazena</button>
+      <button class="chip" data-filter="cap" data-min="6">6+ osoba</button>
+      <button class="chip" data-filter="restoran">Sa restoranom</button>
+    </div>
+    <select class="sort-select" id="sortSelect">
+      <option value="default">Preporučeno</option>
+      <option value="distance">Najbliže bazenima</option>
+      <option value="capacity">Najveći kapacitet</option>
+      <option value="name">Naziv A–Š</option>
+    </select>
+  </div>
+  <div class="results-count" id="resultsCount">Prikazano <b>{{ collections.vile.length }}</b> od <b>{{ collections.vile.length }}</b> vila</div>
+
+  <div class="listing-grid" id="listingGrid">
+    {% for item in collections.vile %}
+    {% set c = item.data.card %}
+    <a class="list-card"
+       data-distance="{{ c.distance if c else 9999 }}"
+       data-capacity="{{ c.capacity if c else 0 }}"
+       data-restoran="{{ '1' if c.restoran else '0' }}"
+       data-name="{{ item.data.title }}"
+       href="{{ item.url | noslash }}">
+      <div class="lc-thumb">
+        {% if c and c.badge %}<span class="lc-badge">{{ c.badge }}</span>{% endif %}
+        {% if c and c.price %}<span class="lc-price">{{ c.price }}</span>{% endif %}
+        {% if item.data.slike and item.data.slike[0] %}
+        <img src="{{ item.data.slike[0] }}" alt="{{ item.data.title }}" onerror="this.style.opacity=0">
+        {% else %}
+        <span class="lc-mono">{{ item.data.title | first }}</span>
+        {% endif %}
+      </div>
+      <div class="lc-body">
+        <h3>{{ item.data.title }}</h3>
+        {% if c and c.rating %}<div class="lc-stars">★★★★★ <span>{{ c.rating }}{% if c.reviews %} ({{ c.reviews }}){% endif %}</span></div>{% endif %}
+        {% if c and c.desc %}<p>{{ c.desc }}</p>{% endif %}
+        {% if c and c.tags and c.tags.length %}
+        <div class="lc-tags">{% for tag in c.tags %}<span class="lc-tag">{{ tag }}</span>{% endfor %}</div>
+        {% endif %}
+        <div class="lc-footer">
+          <span class="lc-call">📞 {{ item.data.telefon or "Pozovite za broj" }}</span>
+          <span class="lc-link">Detalji →</span>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="no-results" id="noResults">Nema vila koje odgovaraju izabranim filterima. <a href="#" onclick="resetListingFilters();return false;" style="color:var(--gold-light)">Resetuj filtere</a></div>
+
+  <div class="load-more-wrap">
+    <button class="load-more-btn" id="loadMoreBtn">Učitaj još smeštaja</button>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Vile u Banji Vrujci",
+  "url": "https://www.banjavrujci.biz/smestaj/vile",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {% for item in collections.vile %}
+      {"@type":"ListItem","position":{{ loop.index }},"name":"{{ item.data.title }}","url":"https://www.banjavrujci.biz{{ item.url | noslash }}"}{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+}
+</script>

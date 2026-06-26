@@ -1,0 +1,38 @@
+---
+layout: base.njk
+title: Vesti i aktuelnosti — Banja Vrujci
+description: "Najnovije vesti, dešavanja i novosti iz Banje Vrujci."
+permalink: /vesti/
+activeNav: vesti
+breadcrumbs:
+  - { label: "Početna", url: "/" }
+  - { label: "Vesti", url: null }
+---
+<div class="container">
+  <div class="page-head">
+    <div class="eyebrow">Vesti · Banja Vrujci</div>
+    <h1>Vesti i aktuelnosti</h1>
+    <p>Najnovije vesti, dešavanja i novosti iz Banje Vrujci — od otvaranja sezone bazena do novih sadržaja u ponudi.</p>
+  </div>
+
+  <div class="content-wrap" style="padding-top:0;">
+    {% if not vestiFeed or vestiFeed.length == 0 %}
+    <div class="note-box">📋 Feed sa banjavrujci.info trenutno nije dostupan u build-u, ili je prazan — ova stranica se automatski osvežava pri svakom novom build-u sajta sa najnovijim vestima.</div>
+    {% endif %}
+
+    <div class="news-grid">
+      {% for n in vestiFeed %}
+      <a class="news-card" href="{{ n.link }}" target="_blank" rel="noopener">
+        <div class="news-thumb">
+          {% if n.image %}<img src="{{ n.image }}" alt="{{ n.title }}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<span>📰</span>'">{% else %}<span>📰</span>{% endif %}
+        </div>
+        <div class="news-body">
+          {% if n.pubDate %}<div class="news-date">{{ n.pubDate }}</div>{% endif %}
+          <h4>{{ n.title }}</h4>
+          <p>{{ n.description }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>

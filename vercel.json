@@ -1,0 +1,14 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "_site",
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/smestaj/apartmani-banja-vrujci/apartmani-jovicic", "destination": "/", "permanent": true },
+    { "source": "/smestaj/apartmani-banja-vrujci/apartmani-nadja", "destination": "/", "permanent": true },
+    { "source": "/smestaj/apartmani-banja-vrujci/apartmani-unikat", "destination": "/", "permanent": true },
+    { "source": "/smestaj/apartmani-banja-vrujci/apartmani-kovacevic-m", "destination": "/", "permanent": true },
+    { "source": "/smestaj/apartmani-banja-vrujci/apartmani-maja", "destination": "/", "permanent": true },
+    { "source": "/smestaj/privatni/kuca-davidovic", "destination": "/", "permanent": true },
+    { "source": "/smestaj/privatni/sobe-sumadinka", "destination": "/", "permanent": true }
+  ]
+}

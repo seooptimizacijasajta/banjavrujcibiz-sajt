@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+
+# AI chatbot/LLM crawleri - eksplicitno dozvoljeno (bitno za vidljivost u ChatGPT, Perplexity, Claude pretragama)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Onemogući indeksiranje admin/CMS panela
+Disallow: /admin/
+
+Sitemap: https://www.banjavrujci.biz/sitemap.xml
