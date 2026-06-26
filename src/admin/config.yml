@@ -1,7 +1,6 @@
-# TODO: zameni "TVOJ-GITHUB-USERNAME/banjavrujci-sajt" pravim repo imenom kad ga napraviš na GitHub-u.
 backend:
   name: github
-  repo: TVOJ-GITHUB-USERNAME/banjavrujci-sajt
+  repo: seooptimizacijasajta/banjavrujcibiz-sajt
   branch: main
 
 # OAuth handshake je implementiran kao Vercel serverless funkcije u /api/auth.js
