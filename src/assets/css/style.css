@@ -540,6 +540,20 @@ table.bus-table td:last-child,table.bus-table th:last-child{text-align:right;}
 }
 .form-note{font-size:11.5px;color:var(--cream-dim);}
 
+/* ===== PRIJATELJI ===== */
+.banner-grid{display:flex;flex-wrap:wrap;gap:18px;align-items:center;}
+.banner-grid a{
+  background:var(--bg-3);border:1px solid var(--line);border-radius:8px;padding:10px 14px;
+  display:flex;align-items:center;justify-content:center;transition:.3s;min-height:60px;
+}
+.banner-grid a:hover{border-color:var(--gold);background:rgba(201,163,92,0.06);}
+.banner-grid img{max-width:140px;max-height:50px;width:auto;height:auto;}
+.friends-list{list-style:none;padding:0;margin-bottom:36px;}
+.friends-list li{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--cream-dim);}
+.friends-list li .icon{font-size:18px;color:var(--gold-light);}
+.friends-list li a{color:var(--gold-light);font-weight:600;}
+.friends-list li a:hover{color:var(--cream);}
+
 .category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
 .cat-block{border:1px solid var(--line);border-radius:12px;padding:26px;transition:.3s;}
 .cat-block:hover{border-color:var(--gold);background:rgba(201,163,92,0.04);}

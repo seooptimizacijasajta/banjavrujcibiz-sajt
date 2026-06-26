@@ -42,7 +42,9 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" -L -A \"Mozilla/5.0\" \"https://www.banjavrujci.info/nekretnine-u-banji\")",
       "Bash(curl -s -L -A \"Mozilla/5.0\" \"https://www.banjavrujci.info/nekretnine-u-banji/feed\")",
       "Bash(curl -s -L -A \"Mozilla/5.0\" \"https://www.banjavrujci.info/nekretnine-u-banji\")",
-      "Bash(echo \"exit:$?\")"
+      "Bash(echo \"exit:$?\")",
+      "Bash(curl -s -L -A \"Mozilla/5.0\" \"https://www.banjavrujci.biz/prijatelji\" -o /tmp/prijatelji.html)",
+      "Read(//tmp/**)"
     ]
   }
 }
