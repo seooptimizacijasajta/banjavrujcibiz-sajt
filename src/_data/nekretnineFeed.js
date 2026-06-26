@@ -1,5 +1,8 @@
-const { fetchRssItems } = require("../../utils/rss.js");
+const { fetchRssItems, isRealEstate } = require("../../utils/rss.js");
 
 module.exports = async function () {
-  return fetchRssItems("https://www.banjavrujci.info/nekretnine/feed", 12);
+  // Banjavrujci.info nema posebnu "nekretnine" kategoriju/feed — svi postovi
+  // (vesti + oglasi) idu kroz isti glavni feed, pa oglase izdvajamo po ključnim
+  // rečima u naslovu/linku ("prodaju", "prodaja", "plac").
+  return fetchRssItems("https://www.banjavrujci.info/feed", 12, { filter: isRealEstate });
 };

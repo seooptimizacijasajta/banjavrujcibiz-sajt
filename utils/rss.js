@@ -7,6 +7,7 @@ function decodeEntities(str) {
     .replace(/&quot;/g, '"')
     .replace(/&#039;/g, "'")
     .replace(/&nbsp;/g, " ")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(code))
     .trim();
 }
 
@@ -20,13 +21,14 @@ function extractFirstImage(html) {
   return m ? m[1] : null;
 }
 
-async function fetchRssItems(url, limit = 12) {
+async function fetchRssItems(url, limit = 12, options = {}) {
+  const { filter, fetchLimit = 100 } = options;
   try {
     const res = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (BanjaVrujciBuild)" } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const xml = await res.text();
-    const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].slice(0, limit);
-    return items.map(([, block]) => {
+    const rawItems = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].slice(0, fetchLimit);
+    let items = rawItems.map(([, block]) => {
       const description = extractTag(block, "description") || extractTag(block, "content:encoded");
       const rawDate = extractTag(block, "pubDate");
       const parsed = rawDate ? new Date(rawDate) : null;
@@ -38,10 +40,17 @@ async function fetchRssItems(url, limit = 12) {
         image: extractFirstImage(description),
       };
     });
+    if (typeof filter === "function") {
+      items = items.filter(filter);
+    }
+    return items.slice(0, limit);
   } catch (err) {
     console.warn(`[rss] Nije moguće učitati feed ${url}: ${err.message}`);
     return [];
   }
 }
 
-module.exports = { fetchRssItems };
+const REAL_ESTATE_PATTERN = /prodaju|prodaja|plac/i;
+const isRealEstate = (item) => REAL_ESTATE_PATTERN.test(item.title) || REAL_ESTATE_PATTERN.test(item.link);
+
+module.exports = { fetchRssItems, isRealEstate };
