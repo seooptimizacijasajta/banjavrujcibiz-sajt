@@ -9,6 +9,7 @@
     { "source": "/smestaj/apartmani-banja-vrujci/apartmani-kovacevic-m", "destination": "/", "permanent": true },
     { "source": "/smestaj/apartmani-banja-vrujci/apartmani-maja", "destination": "/", "permanent": true },
     { "source": "/smestaj/privatni/kuca-davidovic", "destination": "/", "permanent": true },
-    { "source": "/smestaj/privatni/sobe-sumadinka", "destination": "/", "permanent": true }
+    { "source": "/smestaj/privatni/sobe-sumadinka", "destination": "/", "permanent": true },
+    { "source": "/smestaj/apartmani-banja-vrujci/apartmani-stefanovic", "destination": "/", "permanent": true }
   ]
 }

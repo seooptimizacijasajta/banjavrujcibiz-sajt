@@ -60,7 +60,7 @@ slicni:
   - { naziv: "Apartmani Bella", oznaka: "Apartmani · 300m od bazena", url: "/smestaj/apartmani-banja-vrujci/apartmani-bella-banja-vrujci" }
   - { naziv: "Vila Ana", oznaka: "Apartmani · 600m od bazena", url: "/smestaj/apartmani-banja-vrujci/vila-ana" }
   - { naziv: "Apartman LUX", oznaka: "Apartmani · Privatni spa", url: "/smestaj/apartmani-banja-vrujci/apartmani-lux" }
-  - { naziv: "Apartmani Stefanović", oznaka: "Apartmani · 250m od bazena", url: "/smestaj/apartmani-banja-vrujci/apartmani-stefanovic" }
+  - { naziv: "Apartmani Komazec", oznaka: "Apartmani · 400m od bazena", url: "/smestaj/apartmani-banja-vrujci/apartmani-komazec" }
 breadcrumbs:
   - { label: "Početna", url: "/" }
   - { label: "Smeštaj", url: "/smestaj" }

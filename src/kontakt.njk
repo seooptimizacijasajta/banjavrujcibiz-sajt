@@ -27,7 +27,7 @@ breadcrumbs:
       </div>
       <div class="contact-info-row">
         <div class="icon">✉️</div>
-        <div class="text"><b>Email</b><a href="mailto:info@banjavrujci.biz">info@banjavrujci.biz</a></div>
+        <div class="text"><b>Email</b><a href="mailto:banjavrujci@gmail.com">banjavrujci@gmail.com</a></div>
       </div>
       <div class="social-row">
         <a href="https://www.facebook.com/Banja.Vrujci" target="_blank" rel="noopener">f</a>
@@ -40,13 +40,17 @@ breadcrumbs:
     </div>
 
     <div>
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('Demo forma — u produkciji povezati sa pravim email servisom (npr. Web3Forms ili PHP mail).');">
-        <input type="text" placeholder="Vaše ime" required>
-        <input type="email" placeholder="Vaš email" required>
-        <input type="text" placeholder="Tema (npr. Upit za smeštaj)">
-        <textarea placeholder="Vaša poruka..." required></textarea>
+      <form class="contact-form" action="https://formsubmit.co/banjavrujci@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Novi upit sa banjavrujci.biz">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="hidden" name="_next" value="https://www.banjavrujci.biz/kontakt/?poslato=1">
+        <input type="text" name="Ime" placeholder="Vaše ime" required>
+        <input type="email" name="Email" placeholder="Vaš email" required>
+        <input type="text" name="Tema" placeholder="Tema (npr. Upit za smeštaj)">
+        <textarea name="Poruka" placeholder="Vaša poruka..." required></textarea>
         <button type="submit">Pošalji poruku</button>
-        <div class="form-note">⚠️ Demo forma — u produkciji je treba povezati sa stvarnim mail servisom (preporuka: Web3Forms, besplatno, bez PHP komplikacija sa spam filterima).</div>
+        <div class="form-note">Poruke stižu direktno na banjavrujci@gmail.com.</div>
       </form>
     </div>
   </div>
