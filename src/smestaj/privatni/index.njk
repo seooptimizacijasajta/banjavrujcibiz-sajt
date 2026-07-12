@@ -34,11 +34,11 @@ breadcrumbs:
   <div class="listing-grid" id="listingGrid">
     {% for item in collections.privatni %}
     {% set c = item.data.card %}
-    <a class="list-card"
+    <div class="list-card"
        data-distance="{{ c.distance if c else 9999 }}"
        data-capacity="{{ c.capacity if c else 0 }}"
-       data-name="{{ item.data.title }}"
-       href="{{ item.url | noslash }}">
+       data-name="{{ item.data.title }}">
+      <a class="lc-overlay" href="{{ item.url | noslash }}" aria-label="{{ item.data.title }}"></a>
       <div class="lc-thumb">
         {% if c and c.badge %}<span class="lc-badge">{{ c.badge }}</span>{% endif %}
         {% if item.data.slike and item.data.slike[0] %}
@@ -54,11 +54,11 @@ breadcrumbs:
         <div class="lc-tags">{% for tag in c.tags %}<span class="lc-tag">{{ tag }}</span>{% endfor %}</div>
         {% endif %}
         <div class="lc-footer">
-          <span class="lc-call">📞 {{ item.data.telefon or "Pozovite za broj" }}</span>
+          {% if item.data.telefon %}{% set phone = item.data.telefon %}{% include "partials/contact-icons.njk" %}{% else %}<span class="lc-call">📞 Pozovite za broj</span>{% endif %}
           <span class="lc-link">Detalji →</span>
         </div>
       </div>
-    </a>
+    </div>
     {% endfor %}
   </div>
 

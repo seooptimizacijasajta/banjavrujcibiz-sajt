@@ -1,6 +1,14 @@
 module.exports = function (eleventyConfig) {
   eleventyConfig.addGlobalData("currentYear", () => new Date().getFullYear());
   eleventyConfig.addFilter("urlencode", (str) => encodeURIComponent(str || ""));
+  eleventyConfig.addFilter("phoneIntl", (str) => {
+    if (!str) return "";
+    let d = String(str).replace(/\D/g, "");
+    if (d.startsWith("00")) d = d.slice(2);
+    if (d.startsWith("381")) return d;
+    if (d.startsWith("0")) return "381" + d.slice(1);
+    return "381" + d;
+  });
   eleventyConfig.addFilter("noslash", (url) => {
     if (!url || url === "/") return url;
     return url.endsWith("/") ? url.slice(0, -1) : url;
